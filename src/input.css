@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@theme {
+  /* No v4, você pode adicionar fontes ou cores direto aqui se quiser */
+  --font-serif: "Playfair Display", serif;
+}
+
+/* Um toque de suavidade no scroll */
+html {
+  scroll-behavior: smooth;
+}
