@@ -15,11 +15,33 @@
         ::-webkit-scrollbar-thumb { background: #000000; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Ajuste do card 3D */
+        .card-content { opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+        .project-card.active .card-content { opacity: 1; pointer-events: auto; }
+        .project-card.active { box-shadow: 0px 30px 60px rgba(0,0,0,0.8); border-color: white; }
+
+        /* Animações da Faixa Infinita (Esquerda e Direita) */
+        @keyframes marqueeX {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marqueeX {
+            animation: marqueeX 35s linear infinite;
+        }
+
+        @keyframes marqueeXReverse {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+        .animate-marqueeX-reverse {
+            animation: marqueeXReverse 35s linear infinite;
+        }
     </style>
 </head>
 <body class="bg-[#C7DDEB] text-black antialiased selection:bg-black selection:text-[#C7DDEB]">
 
-    <nav class="fixed top-0 w-full z-50 px-6 py-4 md:px-12 flex justify-between items-center bg-[#C7DDEB]/90 backdrop-blur-md border-b-2 border-black">
+    <nav class="fixed top-0 w-full z-50 px-6 py-4 md:px-12 flex justify-between items-center bg-[#C7DDEB]/90 backdrop-blur-md border-b-2 border-black transition-transform duration-300" id="navbar">
         <a href="#" class="text-[10px] font-black uppercase tracking-[0.4em] text-black">Lucas Emanuel</a>
         <div class="flex gap-6 md:gap-10 items-center">
             <a href="#projetos" class="text-[9px] font-bold uppercase tracking-widest text-black hover:opacity-60 transition-all">Projetos</a>
@@ -29,7 +51,7 @@
     </nav>
 
     <main>
-        <section class="min-h-[90vh] flex flex-col justify-center px-6 md:px-12 lg:px-24 pt-40 md:pt-20">
+        <section id="hero" class="min-h-[90vh] flex flex-col justify-center px-6 md:px-12 lg:px-24 pt-40 md:pt-20 relative">
             <div class="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
                 
                 <div>
@@ -58,106 +80,325 @@
                 </div>
 
                 <div class="hidden md:flex justify-center lg:justify-end">
-                    <div class="w-full max-w-xs aspect-[2/3] overflow-hidden border-2 border-black bg-black rounded-2xl relative">
+                    <div class="w-full max-w-xs aspect-2/3 overflow-hidden border-2 border-black bg-black rounded-2xl relative">
                         <img src="./assets/perfil.png" alt="Lucas Emanuel" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 relative z-10">
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="projetos" class="min-h-[90vh] flex flex-col justify-center py-20 bg-[#C7DDEB]">
-            <div class="w-full">
+        <div class="w-full bg-black flex flex-col border-y-2 border-black relative z-20">
+            <div class="w-full py-3 md:py-4 overflow-hidden border-b border-white/10 flex items-center">
+                <div class="flex w-max animate-marqueeX select-none hover:[animation-play-state:paused]">
+                    <div class="flex items-center">
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Advocacia Premium</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Arquitetura & Design</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Clínicas de Estética</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Odontologia</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Medicina Especializada</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Medicina Veterinária</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Fotografia</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Mentorias & Lançamentos</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Advocacia Premium</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Arquitetura & Design</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Clínicas de Estética</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Odontologia</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Medicina Especializada</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Medicina Veterinária</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Fotografia</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Mentorias & Lançamentos</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full py-3 md:py-4 overflow-hidden flex items-center">
+                <div class="flex w-max animate-marqueeX-reverse select-none hover:[animation-play-state:paused]">
+                    <div class="flex items-center">
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Advocacia Premium</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Arquitetura & Design</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Clínicas de Estética</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Odontologia</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Medicina Especializada</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Medicina Veterinária</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Fotografia</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Mentorias & Lançamentos</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Advocacia Premium</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Arquitetura & Design</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Clínicas de Estética</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Odontologia</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Medicina Especializada</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Medicina Veterinária</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Fotografia</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Mentorias & Lançamentos</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section id="projetos" class="flex flex-col justify-center py-16 md:py-20 bg-[#111] text-[#C7DDEB] overflow-hidden">
+            <div class="w-full flex flex-col">
                 
-                <div class="px-6 md:px-12 lg:px-24 mb-10 md:mb-16 flex justify-between items-end max-w-7xl mx-auto">
-                    <h2 class="text-4xl md:text-5xl font-black tracking-tighter uppercase text-black leading-none">Selected <br> Works</h2>
-                    <p class="text-[9px] font-black text-black/50 uppercase tracking-[0.4em] hidden md:block">Arraste para explorar</p>
+                <div class="px-6 md:px-12 lg:px-24 mb-10 md:mb-16 flex flex-col items-center justify-center text-center max-w-7xl mx-auto w-full relative z-20">
+                    <h2 class="text-3xl md:text-5xl font-black tracking-tighter uppercase leading-none text-white mb-3">
+                        Selected Works
+                    </h2>
+                    <p class="text-[9px] font-black text-white/50 uppercase tracking-[0.4em] block">Arraste ou segure para ver</p>
                 </div>
 
-                <div class="w-full relative">
-                    <div class="projetos-slider flex gap-4 md:gap-6 items-center overflow-x-auto no-scrollbar cursor-grab px-6 w-full select-none">
-                        
-                        <div class="group border-2 border-black rounded-2xl bg-white p-6 md:p-8 flex flex-col justify-between w-[260px] md:w-[320px] h-[320px] md:h-[400px] shrink-0 hover:bg-black hover:text-white transition-colors duration-300 pointer-events-auto">
-                            <span class="text-[8px] md:text-[9px] font-black uppercase tracking-widest opacity-50 block">Nutrição & Saúde</span>
-                            <div class="flex flex-col gap-4 md:gap-5 items-start">
-                                <h3 class="text-2xl md:text-3xl font-black uppercase tracking-tighter">Bianca Brayner</h3>
-                                <a href="#" class="inline-block border-2 border-black rounded-xl px-4 md:px-5 py-2 text-[8px] md:text-[9px] font-black uppercase tracking-widest group-hover:bg-white group-hover:text-black group-hover:border-white transition-all">Ver Projeto</a>
-                            </div>
-                        </div>
-
-                        <div class="group border-2 border-black rounded-2xl bg-white p-6 flex flex-col justify-between w-[180px] md:w-[220px] h-[240px] md:h-[280px] shrink-0 hover:bg-black hover:text-white transition-colors duration-300 pointer-events-auto">
-                            <span class="text-[8px] md:text-[9px] font-black uppercase tracking-widest opacity-50 block">Educação</span>
+                <div class="carousel-container relative w-full h-100 md:h-112.5 flex items-center justify-center perspective-[1400px] cursor-grab">
+                    
+                    <div class="project-card absolute w-[85vw] sm:w-95 md:w-150 aspect-4/3 md:aspect-video rounded-2xl border-2 border-black bg-black overflow-hidden transition-all duration-500 ease-in-out">
+                        <img src="./assets/dentista.png" alt="Clínica Odontológica" draggable="false" class="card-img absolute inset-0 w-full h-full object-cover object-top grayscale transition-all duration-500">
+                        <div class="absolute inset-0 bg-linear-to-t from-black via-black/60 to-transparent"></div>
+                        <div class="card-content relative z-10 flex flex-col justify-between h-full p-5 md:p-6">
+                            <span class="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-[#C7DDEB] block drop-shadow-md">Landing Page</span>
                             <div class="flex flex-col gap-3 md:gap-4 items-start">
-                                <h3 class="text-lg md:text-xl font-black uppercase tracking-tighter">Santo Thomas</h3>
-                                <a href="#" class="inline-block border-2 border-black rounded-xl px-3 md:px-4 py-2 text-[8px] font-black uppercase tracking-widest group-hover:bg-white group-hover:text-black group-hover:border-white transition-all">Site</a>
+                                <h3 class="text-3xl md:text-3xl font-black uppercase tracking-tighter text-white leading-none drop-shadow-lg">Clínica Odontológica</h3>
+                                <a href="https://site-para-dentistas.vercel.app/" class="inline-block bg-white text-black border-2 border-transparent rounded-xl px-5 py-3 text-[10px] font-black uppercase tracking-widest hover:bg-[#C7DDEB] hover:text-black transition-all">Ver Projeto</a>
                             </div>
                         </div>
-
-                        <div class="group border-2 border-black rounded-2xl bg-white p-8 md:p-10 flex flex-col justify-between w-[280px] md:w-[450px] h-[400px] md:h-[550px] shrink-0 hover:bg-black hover:text-white transition-colors duration-300 pointer-events-auto">
-                            <span class="text-[8px] md:text-[10px] font-black uppercase tracking-widest opacity-50 block">Advocacia Premium</span>
-                            <div class="flex flex-col gap-4 md:gap-6 items-start">
-                                <h3 class="text-4xl md:text-5xl font-black uppercase tracking-tighter">Ihana Braga</h3>
-                                <a href="#" class="inline-block border-2 border-black rounded-xl px-5 md:px-6 py-3 text-[8px] md:text-[10px] font-black uppercase tracking-widest group-hover:bg-white group-hover:text-black group-hover:border-white transition-all">Ver Completo</a>
-                            </div>
-                        </div>
-
-                        <div class="group border-2 border-black rounded-2xl bg-white p-6 md:p-8 flex flex-col justify-between w-[240px] md:w-[300px] h-[340px] md:h-[450px] shrink-0 hover:bg-black hover:text-white transition-colors duration-300 pointer-events-auto">
-                            <span class="text-[8px] md:text-[9px] font-black uppercase tracking-widest opacity-50 block">Odontologia</span>
-                            <div class="flex flex-col gap-4 md:gap-5 items-start">
-                                <h3 class="text-2xl md:text-3xl font-black uppercase tracking-tighter">Dra. Rayssa</h3>
-                                <a href="#" class="inline-block border-2 border-black rounded-xl px-4 md:px-5 py-2 text-[8px] md:text-[9px] font-black uppercase tracking-widest group-hover:bg-white group-hover:text-black group-hover:border-white transition-all">Ver Projeto</a>
-                            </div>
-                        </div>
-
-                        <div class="group border-2 border-black rounded-2xl bg-white p-6 md:p-8 flex flex-col justify-between w-[280px] md:w-[400px] h-[260px] md:h-[320px] shrink-0 hover:bg-black hover:text-white transition-colors duration-300 pointer-events-auto">
-                            <span class="text-[8px] md:text-[9px] font-black uppercase tracking-widest opacity-50 block">Mentoria Digital</span>
-                            <div class="flex flex-col gap-4 md:gap-5 items-start">
-                                <h3 class="text-3xl md:text-4xl font-black uppercase tracking-tighter">Método Contrato</h3>
-                                <a href="#" class="inline-block border-2 border-black rounded-xl px-4 md:px-5 py-2 text-[8px] md:text-[9px] font-black uppercase tracking-widest group-hover:bg-white group-hover:text-black group-hover:border-white transition-all">Ver Projeto</a>
-                            </div>
-                        </div>
-
-                        <div class="group border-2 border-black rounded-2xl bg-white p-6 md:p-8 flex flex-col justify-between w-[200px] md:w-[250px] h-[360px] md:h-[480px] shrink-0 hover:bg-black hover:text-white transition-colors duration-300 pointer-events-auto">
-                            <span class="text-[8px] md:text-[9px] font-black uppercase tracking-widest opacity-50 block">Estética</span>
-                            <div class="flex flex-col gap-4 md:gap-5 items-start">
-                                <h3 class="text-xl md:text-2xl font-black uppercase tracking-tighter">Clínica <br> Estética</h3>
-                                <a href="#" class="inline-block border-2 border-black rounded-xl px-4 md:px-5 py-2 text-[8px] md:text-[9px] font-black uppercase tracking-widest group-hover:bg-white group-hover:text-black group-hover:border-white transition-all">Projeto</a>
-                            </div>
-                        </div>
-                        
                     </div>
+
+                    <div class="project-card absolute w-[85vw] sm:w-95 md:w-150 aspect-4/3 md:aspect-video rounded-2xl border-2 border-black bg-black overflow-hidden transition-all duration-500 ease-in-out">
+                        <img src="./assets/estetica.png" alt="Clínica de Estética" draggable="false" class="card-img absolute inset-0 w-full h-full object-cover object-top grayscale transition-all duration-500">
+                        <div class="absolute inset-0 bg-linear-to-t from-black via-black/60 to-transparent"></div>
+                        <div class="card-content relative z-10 flex flex-col justify-between h-full p-5 md:p-6">
+                            <span class="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-[#C7DDEB] block drop-shadow-md">Site Premium</span>
+                            <div class="flex flex-col gap-3 md:gap-4 items-start">
+                                <h3 class="text-3xl md:text-3xl font-black uppercase tracking-tighter text-white leading-none drop-shadow-lg">Clínica de Estética</h3>
+                                <a href="https://site-para-esteticista.vercel.app/" class="inline-block bg-white text-black border-2 border-transparent rounded-xl px-5 py-3 text-[10px] font-black uppercase tracking-widest hover:bg-[#C7DDEB] hover:text-black transition-all">Ver Projeto</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card absolute w-[85vw] sm:w-95 md:w-150 aspect-4/3 md:aspect-video rounded-2xl border-2 border-black bg-black overflow-hidden transition-all duration-500 ease-in-out">
+                        <img src="./assets/veterinaria.png" alt="Clínica Veterinária" draggable="false" class="card-img absolute inset-0 w-full h-full object-cover object-top grayscale transition-all duration-500">
+                        <div class="absolute inset-0 bg-linear-to-t from-black via-black/60 to-transparent"></div>
+                        <div class="card-content relative z-10 flex flex-col justify-between h-full p-5 md:p-6">
+                            <span class="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-[#C7DDEB] block drop-shadow-md">Institucional</span>
+                            <div class="flex flex-col gap-3 md:gap-4 items-start">
+                                <h3 class="text-3xl md:text-3xl font-black uppercase tracking-tighter text-white leading-none drop-shadow-lg">Medicina Veterinária</h3>
+                                <a href="https://site-para-veterin-rios.vercel.app/" class="inline-block bg-white text-black border-2 border-transparent rounded-xl px-5 py-3 text-[10px] font-black uppercase tracking-widest hover:bg-[#C7DDEB] hover:text-black transition-all">Ver Projeto</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card absolute w-[85vw] sm:w-95 md:w-150 aspect-4/3 md:aspect-video rounded-2xl border-2 border-black bg-black overflow-hidden transition-all duration-500 ease-in-out">
+                        <img src="./assets/arquiteto.png" alt="Portfólio de Arquitetura" draggable="false" class="card-img absolute inset-0 w-full h-full object-cover object-top grayscale transition-all duration-500">
+                        <div class="absolute inset-0 bg-linear-to-t from-black via-black/60 to-transparent"></div>
+                        <div class="card-content relative z-10 flex flex-col justify-between h-full p-5 md:p-6">
+                            <span class="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-[#C7DDEB] block drop-shadow-md">Site Portfólio</span>
+                            <div class="flex flex-col gap-3 md:gap-4 items-start">
+                                <h3 class="text-3xl md:text-3xl font-black uppercase tracking-tighter text-white leading-none drop-shadow-lg">Arquitetura & Design</h3>
+                                <a href="https://site-maria-isabel-arquiteta.vercel.app/" class="inline-block bg-white text-black border-2 border-transparent rounded-xl px-5 py-3 text-[10px] font-black uppercase tracking-widest hover:bg-[#C7DDEB] hover:text-black transition-all">Ver Projeto</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card absolute w-[85vw] sm:w-95 md:w-150 aspect-4/3 md:aspect-video rounded-2xl border-2 border-black bg-black overflow-hidden transition-all duration-500 ease-in-out">
+                        <img src="./assets/advogada.png" alt="Advocacia" draggable="false" class="card-img absolute inset-0 w-full h-full object-cover object-top grayscale transition-all duration-500">
+                        <div class="absolute inset-0 bg-linear-to-t from-black via-black/60 to-transparent"></div>
+                        <div class="card-content relative z-10 flex flex-col justify-between h-full p-5 md:p-6">
+                            <span class="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-[#C7DDEB] block drop-shadow-md">Design Premium</span>
+                            <div class="flex flex-col gap-3 md:gap-4 items-start">
+                                <h3 class="text-3xl md:text-3xl font-black uppercase tracking-tighter text-white leading-none drop-shadow-lg">Advocacia Premium</h3>
+                                <a href="https://arianamendonca.adv.br/" class="inline-block bg-white text-black border-2 border-transparent rounded-xl px-5 py-3 text-[10px] font-black uppercase tracking-widest hover:bg-[#C7DDEB] hover:text-black transition-all">Ver Projeto</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card absolute w-[85vw] sm:w-95 md:w-150 aspect-4/3 md:aspect-video rounded-2xl border-2 border-black bg-black overflow-hidden transition-all duration-500 ease-in-out">
+                        <img src="./assets/nutricionista.png" alt="Saúde e Bem Estar" draggable="false" class="card-img absolute inset-0 w-full h-full object-cover object-top grayscale transition-all duration-500">
+                        <div class="absolute inset-0 bg-linear-to-t from-black via-black/60 to-transparent"></div>
+                        <div class="card-content relative z-10 flex flex-col justify-between h-full p-5 md:p-6">
+                            <span class="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-[#C7DDEB] block drop-shadow-md">Site Institucional</span>
+                            <div class="flex flex-col gap-3 md:gap-4 items-start">
+                                <h3 class="text-3xl md:text-3xl font-black uppercase tracking-tighter text-white leading-none drop-shadow-lg">Saúde & Nutrição</h3>
+                                <a href="https://lucasemanuel7799-del.github.io/Site-Bianca-Brayner-Nutricionista/" class="inline-block bg-white text-black border-2 border-transparent rounded-xl px-5 py-3 text-[10px] font-black uppercase tracking-widest hover:bg-[#C7DDEB] hover:text-black transition-all">Ver Projeto</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="mt-8 md:mt-12 px-6 flex justify-center w-full max-w-7xl mx-auto relative z-20">
+                    <a href="https://wa.me/5585996158752" class="inline-block bg-white text-black border-2 border-white px-8 py-4 md:py-5 text-[10px] md:text-[11px] font-black uppercase tracking-[0.3em] hover:bg-transparent hover:text-white transition-all text-center rounded-xl w-full sm:w-auto">
+                        Quero um Projeto Exclusivo
+                    </a>
                 </div>
 
             </div>
         </section>
 
+        <div class="w-full bg-black flex flex-col border-y-2 border-black relative z-20">
+            <div class="w-full py-3 md:py-4 overflow-hidden border-b border-white/10 flex items-center">
+                <div class="flex w-max animate-marqueeX select-none hover:[animation-play-state:paused]">
+                    <div class="flex items-center">
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Advocacia Premium</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Arquitetura & Design</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Clínicas de Estética</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Odontologia</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Medicina Especializada</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Medicina Veterinária</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Fotografia</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Mentorias & Lançamentos</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Advocacia Premium</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Arquitetura & Design</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Clínicas de Estética</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Odontologia</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Medicina Especializada</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Medicina Veterinária</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Fotografia</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Mentorias & Lançamentos</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full py-3 md:py-4 overflow-hidden flex items-center">
+                <div class="flex w-max animate-marqueeX-reverse select-none hover:[animation-play-state:paused]">
+                    <div class="flex items-center">
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Advocacia Premium</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Arquitetura & Design</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Clínicas de Estética</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Odontologia</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Medicina Especializada</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Medicina Veterinária</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Fotografia</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Mentorias & Lançamentos</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Advocacia Premium</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Arquitetura & Design</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Clínicas de Estética</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Odontologia</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Medicina Especializada</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Medicina Veterinária</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Fotografia</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                        <span class="text-[#C7DDEB] text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mx-6 whitespace-nowrap">Mentorias & Lançamentos</span>
+                        <span class="text-white/30 text-xs mx-2">•</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <section id="contato" class="min-h-[90vh] flex flex-col justify-center px-6 md:px-12 lg:px-24 py-20 bg-black text-[#C7DDEB]">
-            <div class="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+            <div class="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
                 
-                <div class="flex flex-col items-start">
+                <div class="flex flex-col items-start lg:sticky lg:top-32">
                     <h2 class="text-[9px] font-black uppercase tracking-[0.5em] mb-6 opacity-60">Próximo Passo</h2>
-                    <p class="text-4xl md:text-6xl font-black tracking-tighter leading-[0.9] uppercase text-white mb-8">
-                        Vamos construir <br> sua Landing Page.
+                    <p class="text-4xl md:text-6xl font-black tracking-tighter leading-[0.9] uppercase text-white mb-10 md:mb-12">
+                        Vamos criar <br> seu site.
                     </p>
-                    <a href="mailto:hello@lucasemanuel.com" class="text-lg md:text-2xl font-black border-b-2 border-[#C7DDEB] pb-1 hover:text-white transition-colors mb-12">
-                        hello@lucasemanuel.com
-                    </a>
-                    
-                    <a href="https://wa.me/5585999999999" class="inline-block bg-[#C7DDEB] text-black px-10 py-5 md:py-5 text-[10px] font-black uppercase tracking-[0.3em] hover:bg-white transition-all text-center rounded-xl w-full md:w-auto">
+                    <a href="https://wa.me/5585996158752" class="inline-block bg-[#C7DDEB] text-black px-10 py-5 md:py-6 text-[10px] md:text-[11px] font-black uppercase tracking-[0.3em] hover:bg-white transition-all text-center rounded-xl w-full md:w-auto mb-16 md:mb-20">
                         WhatsApp Agora
                     </a>
+
+                    <div class="flex flex-col w-full">
+                        <h2 class="text-[9px] font-black uppercase tracking-[0.5em] mb-6 opacity-60">Tech Stack Base</h2>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="border border-[#C7DDEB]/30 rounded-lg px-4 md:px-5 py-2 text-[8px] md:text-[9px] font-black uppercase tracking-widest text-[#C7DDEB] cursor-default">HTML5 & CSS3</span>
+                            <span class="border border-[#C7DDEB]/30 rounded-lg px-4 md:px-5 py-2 text-[8px] md:text-[9px] font-black uppercase tracking-widest text-[#C7DDEB] cursor-default">Tailwind v4</span>
+                            <span class="border border-[#C7DDEB]/30 rounded-lg px-4 md:px-5 py-2 text-[8px] md:text-[9px] font-black uppercase tracking-widest text-[#C7DDEB] cursor-default">JavaScript / TS</span>
+                            <span class="border border-[#C7DDEB]/30 rounded-lg px-4 md:px-5 py-2 text-[8px] md:text-[9px] font-black uppercase tracking-widest text-[#C7DDEB] cursor-default">React</span>
+                            <span class="border border-[#C7DDEB]/30 rounded-lg px-4 md:px-5 py-2 text-[8px] md:text-[9px] font-black uppercase tracking-widest text-[#C7DDEB] cursor-default">Node.js</span>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="flex flex-col">
-                    <h2 class="text-[9px] font-black uppercase tracking-[0.5em] mb-8 opacity-60">Tech Stack</h2>
-                    
-                    <div class="flex flex-wrap gap-3">
-                        <span class="border-2 border-[#C7DDEB] rounded-lg px-5 md:px-6 py-2 md:py-3 text-[9px] md:text-[10px] font-black uppercase tracking-widest hover:bg-[#C7DDEB] hover:text-black transition-colors cursor-default">HTML5</span>
-                        <span class="border-2 border-[#C7DDEB] rounded-lg px-5 md:px-6 py-2 md:py-3 text-[9px] md:text-[10px] font-black uppercase tracking-widest hover:bg-[#C7DDEB] hover:text-black transition-colors cursor-default">CSS3</span>
-                        <span class="border-2 border-[#C7DDEB] rounded-lg px-5 md:px-6 py-2 md:py-3 text-[9px] md:text-[10px] font-black uppercase tracking-widest hover:bg-[#C7DDEB] hover:text-black transition-colors cursor-default">Tailwind v4</span>
-                        <span class="border-2 border-[#C7DDEB] rounded-lg px-5 md:px-6 py-2 md:py-3 text-[9px] md:text-[10px] font-black uppercase tracking-widest hover:bg-[#C7DDEB] hover:text-black transition-colors cursor-default">JavaScript</span>
-                        <span class="border-2 border-[#C7DDEB] rounded-lg px-5 md:px-6 py-2 md:py-3 text-[9px] md:text-[10px] font-black uppercase tracking-widest hover:bg-[#C7DDEB] hover:text-black transition-colors cursor-default">TypeScript</span>
-                        <span class="border-2 border-[#C7DDEB] rounded-lg px-5 md:px-6 py-2 md:py-3 text-[9px] md:text-[10px] font-black uppercase tracking-widest hover:bg-[#C7DDEB] hover:text-black transition-colors cursor-default">React</span>
-                        <span class="border-2 border-[#C7DDEB] rounded-lg px-5 md:px-6 py-2 md:py-3 text-[9px] md:text-[10px] font-black uppercase tracking-widest hover:bg-[#C7DDEB] hover:text-black transition-colors cursor-default">Node.js</span>
+                    <h2 class="text-[9px] font-black uppercase tracking-[0.5em] mb-8 opacity-60">O que eu construo</h2>
+                    <div class="flex flex-col gap-10 md:gap-12">
+                        
+                        <div class="border-l-2 border-[#C7DDEB] pl-5">
+                            <h3 class="text-xl md:text-2xl font-black uppercase text-white mb-3">Landing Pages de Alta Conversão</h3>
+                            <p class="text-sm md:text-base text-white/70 font-medium leading-relaxed">
+                                Páginas focadas em um único objetivo: transformar seu visitante em lead ou cliente. Estrutura agressiva de copywriting e carregamento instantâneo.
+                            </p>
+                        </div>
+
+                        <div class="border-l-2 border-[#C7DDEB] pl-5">
+                            <h3 class="text-xl md:text-2xl font-black uppercase text-white mb-3">Sites Institucionais Premium</h3>
+                            <p class="text-sm md:text-base text-white/70 font-medium leading-relaxed">
+                                A sede da sua empresa na internet. Projetos completos para transmitir a autoridade real do seu escritório ou clínica no ambiente digital.
+                            </p>
+                        </div>
+
+                        <div class="border-l-2 border-[#C7DDEB] pl-5">
+                            <h3 class="text-xl md:text-2xl font-black uppercase text-white mb-3">Otimização de Performance (SEO)</h3>
+                            <p class="text-sm md:text-base text-white/70 font-medium leading-relaxed">
+                                Código limpo, estruturado e sem construtores pesados. Seu site configurado para agradar os algoritmos do Google e ranquear no topo.
+                            </p>
+                        </div>
+
                     </div>
                 </div>
 
@@ -168,7 +409,7 @@
             <div class="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 lg:gap-24 items-center">
                 
                 <div class="order-1 flex justify-center lg:justify-start">
-                    <div class="w-full max-w-[250px] md:max-w-sm aspect-[2/3] overflow-hidden border-2 border-black bg-white rounded-2xl relative group">
+                    <div class="w-full max-w-62.5 md:max-w-sm aspect-2/3 overflow-hidden border-2 border-black bg-white rounded-2xl relative group">
                         <img src="./assets/perfil.png" alt="Lucas Emanuel Sobre" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100">
                     </div>
                 </div>
@@ -180,10 +421,10 @@
                     </p>
                     <div class="mb-8 md:mb-10 max-w-lg border-l-4 border-black pl-5 md:pl-6 p-2 md:p-4">
                        <p class="text-sm text-black/90 font-medium leading-relaxed mb-4 md:mb-6">
-                            Minha jornada começou no design, mas encontrei no desenvolvimento front-end a ferramenta perfeita para unir estética e função. Não acredito em sites que são apenas "bonitos".
+                            Acredito que um site de alto nível nasce de um código estruturado com precisão. Abandonei soluções genéricas e templates prontos porque marcas premium exigem exclusividade, performance e carregamento instantâneo.
                         </p>
                         <p class="text-sm font-black uppercase leading-relaxed">
-                            Meu foco é criar máquinas de conversão para profissionais que não podem se dar ao luxo de ter uma presença digital amadora.
+                            Meu papel como desenvolvedor é traduzir a sua autoridade em uma verdadeira máquina de conversão. Construo presenças digitais para profissionais que não têm espaço para o amadorismo.
                         </p>
                     </div>
 
@@ -207,12 +448,12 @@
                     
                     <div class="faq-item border-b-2 border-black">
                         <button class="faq-btn w-full flex justify-between items-center py-6 md:py-8 text-left hover:opacity-60 transition-opacity">
-                            <span class="text-lg md:text-3xl font-black tracking-tighter uppercase pr-6 md:pr-8">Você usa templates prontos ou WordPress?</span>
-                            <svg class="w-5 h-5 md:w-6 md:h-6 transform transition-transform duration-300 faq-icon flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
+                            <span class="text-lg md:text-3xl font-black tracking-tighter uppercase pr-6 md:pr-8">Quais são as formas de pagamento?</span>
+                            <svg class="w-5 h-5 md:w-6 md:h-6 transform transition-transform duration-300 faq-icon shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                         <div class="faq-content hidden pb-6 md:pb-8">
                             <p class="text-sm md:text-base font-medium leading-relaxed text-black/80 max-w-2xl">
-                                Não. Cada projeto é construído totalmente do zero utilizando código puro e moderno (Tailwind, React, JS). Isso garante um nível de personalização, segurança e velocidade que os templates genéricos não conseguem alcançar.
+                                Trabalho normalmente com sinal de 50% para iniciar o projeto e os 50% restantes na aprovação da entrega final. Os pagamentos podem ser feitos via PIX ou transferência bancária. Em caso de projetos mais robustos, podemos negociar o parcelamento.
                             </p>
                         </div>
                     </div>
@@ -220,7 +461,7 @@
                     <div class="faq-item border-b-2 border-black">
                         <button class="faq-btn w-full flex justify-between items-center py-6 md:py-8 text-left hover:opacity-60 transition-opacity">
                             <span class="text-lg md:text-3xl font-black tracking-tighter uppercase pr-6 md:pr-8">Qual é o prazo médio de entrega?</span>
-                            <svg class="w-5 h-5 md:w-6 md:h-6 transform transition-transform duration-300 faq-icon flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
+                            <svg class="w-5 h-5 md:w-6 md:h-6 transform transition-transform duration-300 faq-icon shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                         <div class="faq-content hidden pb-6 md:pb-8">
                             <p class="text-sm md:text-base font-medium leading-relaxed text-black/80 max-w-2xl">
@@ -232,7 +473,7 @@
                     <div class="faq-item border-b-2 border-black">
                         <button class="faq-btn w-full flex justify-between items-center py-6 md:py-8 text-left hover:opacity-60 transition-opacity">
                             <span class="text-lg md:text-3xl font-black tracking-tighter uppercase pr-6 md:pr-8">O site já vem otimizado para o Google (SEO)?</span>
-                            <svg class="w-5 h-5 md:w-6 md:h-6 transform transition-transform duration-300 faq-icon flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
+                            <svg class="w-5 h-5 md:w-6 md:h-6 transform transition-transform duration-300 faq-icon shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                         <div class="faq-content hidden pb-6 md:pb-8">
                             <p class="text-sm md:text-base font-medium leading-relaxed text-black/80 max-w-2xl">
@@ -244,7 +485,7 @@
                     <div class="faq-item border-b-2 border-black">
                         <button class="faq-btn w-full flex justify-between items-center py-6 md:py-8 text-left hover:opacity-60 transition-opacity">
                             <span class="text-lg md:text-3xl font-black tracking-tighter uppercase pr-6 md:pr-8">Como funciona a hospedagem e o domínio?</span>
-                            <svg class="w-5 h-5 md:w-6 md:h-6 transform transition-transform duration-300 faq-icon flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
+                            <svg class="w-5 h-5 md:w-6 md:h-6 transform transition-transform duration-300 faq-icon shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                         <div class="faq-content hidden pb-6 md:pb-8">
                             <p class="text-sm md:text-base font-medium leading-relaxed text-black/80 max-w-2xl">
@@ -266,73 +507,176 @@
         </div>
     </footer>
 
+    <a href="https://wa.me/5585996158752" id="floating-wpp" class="md:hidden fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full border-2 border-[#128C7E] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-500 opacity-0 pointer-events-none translate-y-10 hover:shadow-none hover:translate-x-1 hover:translate-y-1 flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+    </a>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const slider = document.querySelector('.projetos-slider');
-            if(slider) {
-                let isDown = false;
-                let startX;
-                let scrollLeft;
-                let speed = 2; 
-                let animationId;
-
-                slider.innerHTML += slider.innerHTML;
-
-                function autoScroll() {
-                    if (!isDown) {
-                        slider.scrollLeft += speed;
-                        if (slider.scrollLeft >= slider.scrollWidth / 2) {
-                            slider.scrollLeft = 0;
-                        }
-                    }
-                    animationId = requestAnimationFrame(autoScroll);
-                }
-
-                autoScroll();
-
-                slider.addEventListener('mouseenter', () => { speed = 0; });
-                slider.addEventListener('mouseleave', () => { 
-                    speed = 2;
-                    isDown = false; 
-                    slider.classList.remove('cursor-grabbing'); 
-                    slider.classList.add('cursor-grab');
+            
+            // --- Lógica do Carrossel 3D ---
+            const carouselContainer = document.querySelector('.carousel-container');
+            const originalCards = document.querySelectorAll('.project-card');
+            
+            if(originalCards.length > 0) {
+                originalCards.forEach(card => {
+                    let clone = card.cloneNode(true);
+                    carouselContainer.appendChild(clone);
                 });
 
-                const startDrag = (e) => {
-                    isDown = true;
-                    slider.classList.add('cursor-grabbing');
-                    slider.classList.remove('cursor-grab');
-                    startX = (e.pageX || e.touches[0].pageX) - slider.offsetLeft;
-                    scrollLeft = slider.scrollLeft;
-                };
+                const cards = document.querySelectorAll('.project-card');
+                const totalCards = cards.length;
 
-                const stopDrag = () => {
-                    isDown = false;
-                    slider.classList.remove('cursor-grabbing');
-                    slider.classList.add('cursor-grab');
-                };
+                let currentIndex = 0;
+                let autoPlayInterval;
+                let isHoveredOrDragged = false;
 
-                const moveDrag = (e) => {
-                    if (!isDown) return;
-                    e.preventDefault();
-                    const x = (e.pageX || e.touches[0].pageX) - slider.offsetLeft;
-                    const walk = (x - startX) * 2; 
-                    slider.scrollLeft = scrollLeft - walk;
-                };
+                function updateCarousel() {
+                    const isMobile = window.innerWidth < 768;
+                    const xOffset = isMobile ? 85 : 70; 
+                    const zOffset = isMobile ? 100 : 150;
+                    
+                    const scale1 = isMobile ? 0.75 : 0.85;
+                    const scale2 = isMobile ? 0.55 : 0.7;
+                    const scale3 = isMobile ? 0.35 : 0.55;
 
-                slider.addEventListener('mousedown', startDrag);
-                slider.addEventListener('touchstart', startDrag, {passive: true});
+                    cards.forEach((card, index) => {
+                        let offset = index - currentIndex;
+                        if (offset < -Math.floor(totalCards / 2)) offset += totalCards;
+                        if (offset > Math.floor(totalCards / 2)) offset -= totalCards;
+
+                        const absOffset = Math.abs(offset);
+                        const sign = Math.sign(offset);
+
+                        if (absOffset === 0) {
+                            card.style.transform = `translateX(0px) translateZ(0px) rotateY(0deg) scale(1)`;
+                            card.style.zIndex = 50;
+                            card.style.opacity = 1;
+                            card.querySelector('.card-img').style.filter = 'grayscale(0)';
+                            card.classList.add('active');
+                        } else if (absOffset === 1) {
+                            card.style.transform = `translateX(${sign * xOffset}%) translateZ(-${zOffset}px) rotateY(${-sign * 35}deg) scale(${scale1})`;
+                            card.style.zIndex = 40;
+                            card.style.opacity = 0.8;
+                            card.querySelector('.card-img').style.filter = 'grayscale(1)';
+                            card.classList.remove('active');
+                        } else if (absOffset === 2) {
+                            card.style.transform = `translateX(${sign * xOffset * 1.8}%) translateZ(-${zOffset * 2}px) rotateY(${-sign * 45}deg) scale(${scale2})`;
+                            card.style.zIndex = 30;
+                            card.style.opacity = 0.5;
+                            card.querySelector('.card-img').style.filter = 'grayscale(1)';
+                            card.classList.remove('active');
+                        } else if (absOffset === 3) {
+                            card.style.transform = `translateX(${sign * xOffset * 2.5}%) translateZ(-${zOffset * 3}px) rotateY(${-sign * 55}deg) scale(${scale3})`;
+                            card.style.zIndex = 20;
+                            card.style.opacity = 0.3;
+                            card.querySelector('.card-img').style.filter = 'grayscale(1)';
+                            card.classList.remove('active');
+                        } else {
+                            card.style.transform = `translateX(${sign * xOffset * 3}%) translateZ(-${zOffset * 4}px) scale(0.2)`;
+                            card.style.zIndex = 10;
+                            card.style.opacity = 0;
+                            card.classList.remove('active');
+                        }
+                    });
+                }
+
+                function nextCard() {
+                    currentIndex = (currentIndex + 1) % totalCards;
+                    updateCarousel();
+                }
+
+                function prevCard() {
+                    currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+                    updateCarousel();
+                }
+
+                function startAutoPlay() {
+                    clearInterval(autoPlayInterval);
+                    if (!isHoveredOrDragged) {
+                        autoPlayInterval = setInterval(nextCard, 3000);
+                    }
+                }
+
+                function stopAutoPlay() {
+                    clearInterval(autoPlayInterval);
+                }
+
+                updateCarousel();
+                startAutoPlay();
+                window.addEventListener('resize', updateCarousel);
+
+                cards.forEach((card, index) => {
+                    card.addEventListener('click', () => {
+                        if (currentIndex !== index) {
+                            currentIndex = index;
+                            updateCarousel();
+                        }
+                    });
+                });
+
+                carouselContainer.addEventListener('mouseenter', () => {
+                    isHoveredOrDragged = true;
+                    stopAutoPlay();
+                });
                 
-                slider.addEventListener('mouseup', stopDrag);
-                slider.addEventListener('mouseleave', stopDrag);
-                slider.addEventListener('touchend', stopDrag);
-                
-                slider.addEventListener('mousemove', moveDrag);
-                slider.addEventListener('touchmove', moveDrag, {passive: false});
+                carouselContainer.addEventListener('mouseleave', () => {
+                    isHoveredOrDragged = false;
+                    startAutoPlay();
+                });
+
+                let startPos = 0;
+                carouselContainer.addEventListener('mousedown', (e) => {
+                    isHoveredOrDragged = true;
+                    startPos = e.pageX;
+                    carouselContainer.classList.add('cursor-grabbing');
+                    carouselContainer.classList.remove('cursor-grab');
+                    stopAutoPlay();
+                });
+
+                window.addEventListener('mouseup', (e) => {
+                    if(!isHoveredOrDragged) return;
+                    carouselContainer.classList.remove('cursor-grabbing');
+                    carouselContainer.classList.add('cursor-grab');
+                    
+                    const diff = startPos - e.pageX;
+                    if (Math.abs(diff) > 50) {
+                        if (diff > 0) nextCard();
+                        else prevCard();
+                    }
+                    
+                    if (!carouselContainer.matches(':hover')) {
+                        isHoveredOrDragged = false;
+                        startAutoPlay();
+                    }
+                });
+
+                let touchStartX = 0;
+                carouselContainer.addEventListener('touchstart', (e) => {
+                    isHoveredOrDragged = true;
+                    touchStartX = e.changedTouches[0].screenX;
+                    stopAutoPlay();
+                }, {passive: true});
+
+                carouselContainer.addEventListener('touchend', (e) => {
+                    let touchEndX = e.changedTouches[0].screenX;
+                    const diff = touchStartX - touchEndX;
+                    if (Math.abs(diff) > 40) {
+                        if (diff > 0) nextCard();
+                        else prevCard();
+                    }
+                    
+                    setTimeout(() => {
+                        isHoveredOrDragged = false;
+                        startAutoPlay();
+                    }, 2000);
+                });
             }
 
+            // --- Lógica do FAQ ---
             const faqItems = document.querySelectorAll('.faq-item');
-            
             faqItems.forEach(item => {
                 const btn = item.querySelector('.faq-btn');
                 const content = item.querySelector('.faq-content');
@@ -340,18 +684,32 @@
 
                 btn.addEventListener('click', () => {
                     const isOpen = !content.classList.contains('hidden');
-
                     faqItems.forEach(otherItem => {
                         otherItem.querySelector('.faq-content').classList.add('hidden');
                         otherItem.querySelector('.faq-icon').style.transform = 'rotate(0deg)';
                     });
-
                     if (!isOpen) {
                         content.classList.remove('hidden');
                         icon.style.transform = 'rotate(180deg)';
                     }
                 });
             });
+
+            // --- Lógica do Botão do WhatsApp Flutuante ---
+            const heroSection = document.getElementById('hero');
+            const floatingWpp = document.getElementById('floating-wpp');
+            
+            if (heroSection && floatingWpp) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > heroSection.offsetHeight * 0.8) {
+                        floatingWpp.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-10');
+                        floatingWpp.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+                    } else {
+                        floatingWpp.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+                        floatingWpp.classList.add('opacity-0', 'pointer-events-none', 'translate-y-10');
+                    }
+                });
+            }
         });
     </script>
 </body>
